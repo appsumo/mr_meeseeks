@@ -1,0 +1,8 @@
+version: '3.5'
+services:
+  mr_meeseeks:
+    build:
+      context: .
+    env_file: .env
+    ports:
+      - '9292:9292'
