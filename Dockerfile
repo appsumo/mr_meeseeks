@@ -14,4 +14,4 @@ ENV SLACK_TOKEN="SETME"
 ENV SLACK_CHANEL="#builds"
 ENV AWS_ACCESS_KEY_ID="SETME"
 ENV AWS_SECRET_ACCESS_KEY="SETME"
-CMD ["rackup"]
+CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "-E", "production"]]

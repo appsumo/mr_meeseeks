@@ -9,6 +9,11 @@ require 'rest-client'
 require 'Mr_Meeseeks'
 
 class API < Sinatra::Base
+
+  configure do
+    set :bind, '0.0.0.0'
+  end
+
   @@pending_requests={}
   set :logging, true
 
@@ -24,7 +29,7 @@ class API < Sinatra::Base
 
   def process_message(message)
     id=message["MessageId"]
-    new_message=Bot.new(id,message["Subject"],message["Message"])
+    new_message=Mr_Meeseeks.new(id,message["Subject"],message["Message"])
     @@pending_requests[id]=new_message
   end
 
