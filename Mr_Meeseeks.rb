@@ -25,13 +25,21 @@ class Mr_Meeseeks
     self.ask_for_approval
    end
 
+   def get_approval_details(pipelineName)
+     aws_client = Aws::CodePipeline::Client.new(:region => @aws_region)
+     pipeline_state = aws_client.get_pipeline_state(:name => pipelineName)
+     {:summary => pipeline_state.stage_states[0].action_states[0].latest_execution.summary, :github =>  pipeline_state.stage_states[0].action_states[0].revision_url }
+   end
+
    def ask_for_approval
+         more_details = get_approval_details @pipelineName
          message = {
            type: "interactive_message",
            channel: @slack_channel,
            blocks:[
              { type: "section", text: { type: "mrkdwn", text: "I’m Mr. Meeseeks, look at me!" } },
-             { type: "section", text: { type: "mrkdwn", text: "#{@subject}\n*<#{@approvalReviewLink}|AWS CodePipeline Dashboard>*" } },
+             { type: "section", text: { type: "mrkdwn", text: "#{@subject}\n*<#{@approvalReviewLink}|AWS CodePipeline>*" } },
+             { type: "section", text: { type: "mrkdwn", text: "#{more_details[:summary]} *<#{more_details[:github]}|GitHub>*" } },
              { type: "section",
                  fields: [
                      { type: "mrkdwn", text: "*Pipeline:*\n#{@pipelineName}" },
@@ -68,7 +76,7 @@ class Mr_Meeseeks
        },
        token: @token
      })
-
+     more_details = get_approval_details @pipelineName
      message = {
        replace_original: true,
        ts: @message_ts,
@@ -76,7 +84,8 @@ class Mr_Meeseeks
        type: "interactive_message",
        blocks:[
          { type: "section", text: { type: "mrkdwn", text: "I’m Mr. Meeseeks, look at me!" } },
-         { type: "section", text: { type: "mrkdwn", text: "#{@subject}\n*<#{@approvalReviewLink}|AWS CodePipeline Dashboard>*" } },
+         { type: "section", text: { type: "mrkdwn", text: "#{@subject}\n*<#{@approvalReviewLink}|AWS CodePipeline>*" } },
+         { type: "section", text: { type: "mrkdwn", text: "#{more_details[:summary]} *<#{more_details[:github]}|GitHub>*" } },
          { type: "section",
              fields: [
                  { type: "mrkdwn", text: "*Pipeline:*\n#{@pipelineName}" },
