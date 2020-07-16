@@ -1,4 +1,4 @@
-SLACK_CLIENT_ID="23588697778.1233856165412"
+SLACK_CLIENT_ID=""
 SLACK_API_SECRET=""
 SLACK_AUTHORIZATION_ENDPOINT="https://slack.com/oauth/v2/authorize"
 SLACK_TOKEN_ENDPOINT="https://slack.com/api/oauth.v2.access"

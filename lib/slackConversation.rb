@@ -5,21 +5,6 @@ require 'rest-client'
 require 'MySettings'
 require 'aws-sdk'
 
-
-
-# "{\"region\":\"us-west-2\",
-# \"consoleLink\":\"https://console.aws.amazon.com/codesuite/codepipeline/pipelines/litmus/view?region=us-west-2\",
-# \"approval\":{
-#     \"pipelineName\":\"litmus\",
-#     \"stageName\":\"Build\",
-#     \"actionName\":\"approve-build\",
-#     \"token\":\"af4e33bd-9be4-454c-b237-0cd7d5a7acd8\",
-#     \"expires\":\"2020-07-22T17:09Z\",
-#     \"externalEntityLink\":null,
-#     \"approvalReviewLink\":\"https://console.aws.amazon.com/codesuite/codepipeline/pipelines/litmus/view?region=us-west-2#/Build/approve-build/approve/af4e33bd-9be4-454c-b237-0cd7d5a7acd8\",
-#     \"customData\":null}
-#     }"
-
 class SlackConversation
 
     def initialize(payload)
@@ -58,20 +43,6 @@ class SlackConversation
         self.executePipelineDecision
         self.generateDialog
     end
-
-
-    # blocks:[
-    #     { type: "section", text: { type: "mrkdwn", text: "I’m Mr. Meeseeks, look at me!" } },
-    #     { type: "section", text: { type: "mrkdwn", text: "#{@payload['subject']}\n*<#{@message["approval"]['approvalReviewLink']}|AWS CodePipeline>*" } },
-    #     { type: "section", text: { type: "mrkdwn", text: "*Summary*\n#{@summary} *<#{@git}|Git>*" } },
-    #     { type: "section",
-    #         fields: [
-    #             { type: "mrkdwn", text: "*Pipeline:*\n#{@message["approval"]['pipelineName']}" },
-    #             { type: "mrkdwn", text: "*Stage:*\n#{@message["approval"]["stageName"]}" }
-    #         ]
-    #     },
-    #     { type: "section", text: { type: "mrkdwn", text: "*Action:* #{@message["approval"]["actionName"]}" } }
-    # ]
 
     def generateDialog()
         message = {

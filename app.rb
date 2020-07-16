@@ -102,7 +102,6 @@ class App < Sinatra::Base
                     @@jobs[payload['MessageId']] = approval_request
                 end
         end
-        #pp payload
         status 200
     end
 
