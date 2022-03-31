@@ -1,4 +1,7 @@
 GEM
+  specs:
+
+GEM
   remote: https://rubygems.org/
   specs:
     aws-eventstream (1.1.0)
@@ -928,8 +931,8 @@ GEM
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     netrc (0.11.0)
-    nio4r (2.5.2)
-    puma (4.3.5)
+    nio4r (2.5.8)
+    puma (4.3.12)
       nio4r (~> 2.0)
     rack (2.2.3)
     rack-protection (2.0.8.1)
@@ -956,7 +959,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (~> 3.0, >= 3.0.1)!
   dotenv (~> 2.7, >= 2.7.5)!
-  puma (~> 4.3, >= 4.3.5)!
+  puma (~> 4.3)!
   rest-client (~> 2.1)!
   sinatra (~> 2.0, >= 2.0.8.1)!
 
